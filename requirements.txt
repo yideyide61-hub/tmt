@@ -1,4 +1,6 @@
 Flask
 gunicorn
 apscheduler
+Pillow
 python-telegram-bot==13.15
+
