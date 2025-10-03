@@ -3,6 +3,23 @@ import logging
 import datetime
 from typing import Dict, Any
 from flask import Flask, request
+
+# ======= FIX: Patch imghdr with Pillow =========
+import sys, types
+from PIL import Image
+
+def what(file, h=None):
+    try:
+        img = Image.open(file)
+        return img.format.lower()
+    except:
+        return None
+
+imghdr_stub = types.ModuleType("imghdr")
+imghdr_stub.what = what
+sys.modules["imghdr"] = imghdr_stub
+# ===============================================
+
 from telegram import (
     Bot, Update, InlineKeyboardButton, InlineKeyboardMarkup
 )
